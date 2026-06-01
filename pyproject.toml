@@ -10,5 +10,6 @@ dependencies = [
     "mysql-connector-python>=9.7.0",
     "passlib[bcrypt]>=1.7.4",
     "pydantic>=2.13.4",
+    "pyjwt>=2.13.0",
     "uvicorn>=0.47.0",
 ]

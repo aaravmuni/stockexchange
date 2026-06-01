@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
   </head>
@@ -84,7 +84,9 @@
         const data = await response.json();
         if(data["message"] === "user_created")
         {
-          console.log("Login Succesful");
+          localStorage.setItem("token", data["token"]);
+          localStorage.setItem("new_user", true);
+          window.location.href = "home.html";
         }
         if(data["message"] === "duplicate_username")
         {
@@ -135,7 +137,9 @@
         const data = await response.json();
         if(data["message"] === "correct_password")
         {
-          console.log("Login Succesful");
+          localStorage.setItem("token", data["token"]);
+          localStorage.setItem("new_user", false);
+          window.location.href = "/home.html";
         }
         if(data["message"] === "wrong_password")
         {
