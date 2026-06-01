@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException,Depends
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 import mysql.connector
 from mysql.connector import IntegrityError, Error, pooling
@@ -60,7 +61,8 @@ def register_user(data:LoginRequest):
             (data.username.strip(), hashed)
         )
         conn.commit()
-        return {"message":"user_created"}
+        token = createtoken(data.username.strip())
+        return {"message": "user_created", "token": token}
     except IntegrityError:
         return {"message":"duplicate_username"}
     except Error:
@@ -97,5 +99,21 @@ def login_user(data:LoginRequest):
     else:
         token = createtoken(data.username.strip())
         return {"message": "correct_password", "token": token}
+
+security = HTTPBearer()
+
+def getcurrentuser(creds:HTTPAuthorizationCredentials = Depends(security))->str:
+    token = creds.credentials
+    try:
+        payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
+        return payload["sub"]
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="token_expired")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="invalid_token")
+
+@app.get("/me")
+def readme(username:str = Depends(getcurrentuser)):
+    return {"username": username}
 
 app.mount("/", StaticFiles(directory="frontend", html = True),name="static")
