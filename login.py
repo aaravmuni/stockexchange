@@ -9,10 +9,13 @@ from mysql.connector import IntegrityError, Error, pooling
 from passlib.context import CryptContext
 
 import os
+from dotenv import load_dotenv
 import jwt
 from datetime import datetime, timezone, timedelta
 
-SECRET_KEY = os.environ.get("JWT_SECRET", "backup")
+load_dotenv()
+
+SECRET_KEY = os.environ["JWT_SECRET"]
 ALGORITHM = "HS256"
 TOKEN_EXPIRE_MINUTES = 30
 
@@ -30,7 +33,7 @@ pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_size=5,
     host="localhost",
     user="exchangedbuser",
-    password="123",
+    password=os.environ["DB_PASSWORD"],
     database="exchangelogin"
 )
 
@@ -52,6 +55,8 @@ class LoginRequest(BaseModel):
 
 @app.post("/register")
 def register_user(data:LoginRequest):
+    conn = None
+    cursor = None
     try:
         conn = pool.get_connection()
         cursor = conn.cursor()
@@ -75,6 +80,8 @@ def register_user(data:LoginRequest):
 
 @app.post("/login")
 def login_user(data:LoginRequest):
+    conn = None
+    cursor = None
     try:
         conn = pool.get_connection()
         cursor = conn.cursor()

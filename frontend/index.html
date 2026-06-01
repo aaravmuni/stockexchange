@@ -85,7 +85,7 @@
         if(data["message"] === "user_created")
         {
           localStorage.setItem("token", data["token"]);
-          localStorage.setItem("new_user", true);
+          localStorage.setItem("new_user", "true");
           window.location.href = "home.html";
         }
         if(data["message"] === "duplicate_username")
@@ -138,7 +138,7 @@
         if(data["message"] === "correct_password")
         {
           localStorage.setItem("token", data["token"]);
-          localStorage.setItem("new_user", false);
+          localStorage.setItem("new_user", "true");
           window.location.href = "/home.html";
         }
         if(data["message"] === "wrong_password")

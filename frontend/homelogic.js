@@ -1,8 +1,9 @@
 const token = localStorage.getItem("token");
-console.log(token);
 if (!token) {
   window.location.href = "/index.html"; 
 }
+else{
+let username = null;
 
 async function loadUser()
 {
@@ -20,10 +21,11 @@ async function loadUser()
   }
 
   const data = await response.json();
-  const username = data["username"];
+  username = data["username"];
   greeting.textContent = "Welcom "+username+"!!";
 }
 
 const greeting = document.getElementById("greeting");
 greeting.textContent = "LOADING..."
 loadUser();
+}
