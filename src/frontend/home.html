@@ -3,11 +3,47 @@
   <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="style.css">
     <script src="homelogic.js" defer></script>
+    <script src="sectionhandler.js" defer></script>
   </head>
   <body>
-    <main>
+    <header>
       <h1 id="greeting"></h1>
-    </main>
+    </header>
+    <nav>
+      <ul>
+        <li><a class="sectionselect" href="explore" data-section="explore">Explore</a></li>
+        <li><a class="sectionselect" href="holdings" data-section="holdings">Holdings</a></li>
+        <li><a class="sectionselect" href="orders" data-section="orders">Orders</a></li>
+        <li><a class="sectionselect" href="watchlist" data-section="watchlist">Watchlist</a></li>
+        <li><a class="sectionselect" href="balance" data-section="balance">Balance</a></li>
+        <li><a class="sectionselect" href="settings" data-section="settings">Settings</a></li>
+      </ul>
+    </nav>
+
+    <section id="explore">
+      <h1>EXPLORE</h1>
+    </section>
+
+    <section id="holdings">
+      <h1>HOLDINGS</h1>
+    </section>
+
+    <section id="orders">
+      <h1>ORDERS</h1>
+    </section>
+
+    <section id="watchlist">
+      <h1>WATCHLIST</h1>
+    </section>
+
+    <section id="balance">
+      <h1>WATCHLIST</h1>
+    </section>
+
+    <section id="settings">
+      <h1>SETTINGS</h1>
+    </section>
   </body>
 </html>

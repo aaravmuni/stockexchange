@@ -1,0 +1,12 @@
+nav ul {
+    display: flex;
+    list-style: none;    /* removes the bullet points */
+    padding: 0;
+    margin: 0;
+    gap: 1rem;           /* space between items */
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+}
