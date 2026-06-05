@@ -84,8 +84,8 @@
         const data = await response.json();
         if(data["message"] === "user_created")
         {
-          localStorage.setItem("token", data["token"]);
-          localStorage.setItem("new_user", "true");
+          sessionStorage.setItem("token", data["token"]);
+          sessionStorage.setItem("new_user", "true");
           window.location.href = "home.html";
         }
         if(data["message"] === "duplicate_username")
@@ -137,8 +137,8 @@
         const data = await response.json();
         if(data["message"] === "correct_password")
         {
-          localStorage.setItem("token", data["token"]);
-          localStorage.setItem("new_user", "false");
+          sessionStorage.setItem("token", data["token"]);
+          sessionStorage.setItem("new_user", "false");
           window.location.href = "/home.html";
         }
         if(data["message"] === "wrong_password")

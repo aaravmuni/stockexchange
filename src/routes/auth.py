@@ -23,6 +23,10 @@ def register_user(data:schemas.LoginRequest):
             "INSERT INTO users (username, password) VALUES (%s, %s)",
             (data.username.strip(), hashed)
         )
+        cursor.execute(
+            "INSERT INTO balances (user_id, balance) VALUES (%s, %s)",
+            (cursor.lastrowid, 0.00)
+        )
         conn.commit()
         token = security.createtoken(data.username.strip())
         return {"message": "user_created", "token": token}

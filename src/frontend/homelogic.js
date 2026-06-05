@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 if (!token) {
   window.location.href = "/index.html"; 
 }
@@ -15,7 +15,7 @@ async function loadUser()
 
   if(response.status === 401)
   {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     window.location.href = "/index.html"; 
     return;
   }
